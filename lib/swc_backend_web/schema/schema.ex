@@ -20,7 +20,7 @@ defmodule SwcBackendWeb.Schema.Schema do
         end
 
         @desc "Saves a user"
-        field :create_user, :user_type do
+        field :create_user, :session_type do
             arg(:input, non_null(:user_input_type))
             resolve(&UserResolvers.create_user/3)
         end

@@ -8,6 +8,7 @@ defmodule SwcBackend.Accounts.User do
     field :username, :string, unique: true
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
+    field :role, :string, default: "user"
 
     timestamps()
   end
