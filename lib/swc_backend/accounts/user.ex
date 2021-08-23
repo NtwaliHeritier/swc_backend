@@ -1,7 +1,7 @@
 defmodule SwcBackend.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias SwcBackend.Articles.Post
+  alias SwcBackend.Articles.{Post, Comment}
 
   schema "users" do
     field :email, :string, unique: true
@@ -17,6 +17,7 @@ defmodule SwcBackend.Accounts.User do
     field :picture, :string, default: "none"
     field :status, :string
     has_many :posts, Post
+    has_many :comments, Comment
 
     timestamps()
   end

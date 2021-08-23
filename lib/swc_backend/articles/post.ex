@@ -2,12 +2,14 @@ defmodule SwcBackend.Articles.Post do
   use Ecto.Schema
   import Ecto.Changeset
   alias SwcBackend.Accounts.User
+  alias SwcBackend.Accounts.Comment
 
   schema "posts" do
     field :picture, :string
     field :text, :string
     field :video, :string
     belongs_to :user, User
+    has_many :comments, Comment
 
     timestamps()
   end

@@ -3,7 +3,7 @@ defmodule SwcBackendWeb.Schema.Schema do
     alias SwcBackendWeb.Middleware.Authorize
     alias SwcBackend.{Accounts, Articles}
 
-    alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers}
+    alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers, CommentResolvers}
 
     import_types(SwcBackendWeb.Schema.Types)
 
@@ -28,10 +28,16 @@ defmodule SwcBackendWeb.Schema.Schema do
             resolve(&UserResolvers.create_user/3)
         end
 
-        @desc "login user"
+        @desc "Logs in a user"
         field :login_user, :session_type do
             arg(:input, non_null(:session_input_type))
             resolve(&SessionResolvers.login_user/3)
+        end
+
+        @desc "Adds a comment to a post"
+        field :add_comment, :comment_type do
+            arg(:input, :comment_input_type)
+            resolve(&CommentResolvers.create_comment/3)
         end
     end
 
