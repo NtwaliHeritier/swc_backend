@@ -49,7 +49,8 @@ defmodule SwcBackend.MixProject do
       {:cloudex, "~> 1.4"},
       {:dotenvy, "~> 0.5.0"},
       {:argon2_elixir, "~> 2.4"},
-      {:guardian, "~> 2.2"}
+      {:guardian, "~> 2.2"},
+      {:dataloader, "~> 1.0"}
     ]
   end
 
