@@ -1,7 +1,7 @@
 defmodule SwcBackendWeb.Schema.Schema do
     use Absinthe.Schema
 
-    alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers}
+    alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers}
 
     import_types(SwcBackendWeb.Schema.Types)
 
@@ -23,6 +23,12 @@ defmodule SwcBackendWeb.Schema.Schema do
         field :create_user, :user_type do
             arg(:input, non_null(:user_input_type))
             resolve(&UserResolvers.create_user/3)
+        end
+
+        @desc "login user"
+        field :login_user, :session_type do
+            arg(:input, non_null(:session_input_type))
+            resolve(&SessionResolvers.login_user/3)
         end
     end
 end
