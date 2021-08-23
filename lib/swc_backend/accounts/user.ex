@@ -17,7 +17,10 @@ defmodule SwcBackend.Accounts.User do
     user
     |> cast(attrs, [:email, :username, :password, :password_confirmation])
     |> validate_required([:email, :username, :password, :password_confirmation])
-    |> unique_constraint([:username, :email])
+    |> update_change(:email, &String.downcase/1)
+    |> update_change(:username, &String.downcase/1)
+    |> validate_format(:email, ~r/@/)
+    |> unique_constraint(:username)
     |> validate_confirmation(:password)
     |> password_hash()
   end
