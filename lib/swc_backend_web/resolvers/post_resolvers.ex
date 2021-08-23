@@ -18,12 +18,5 @@ defmodule SwcBackendWeb.Resolvers.PostResolvers do
             _ ->
                 {:error, message: "Post not created, make sure all fields are filled correctly"}
         end
-
-        # case Articles.create_post(%{input | picture: picture_url, video: video_url}) do
-        #     {:ok, post} ->
-        #         {:ok, post}
-        #     {:error, %Ecto.Changeset{} = changeset} ->
-        #         {:error, message: "Post not created", details: ChangesetErrors.error_details(changeset)}
-        # end
     end
 end

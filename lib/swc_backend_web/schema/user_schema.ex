@@ -1,4 +1,4 @@
-defmodule SwcBackendWeb.Schema.UserSchema do
+defmodule SwcBackendWeb.Schema.Types.UserSchema do
     use Absinthe.Schema.Notation
 
     object :user_type do

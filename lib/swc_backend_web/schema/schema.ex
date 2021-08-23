@@ -18,5 +18,11 @@ defmodule SwcBackendWeb.Schema.Schema do
             arg(:input, non_null(:post_input_type))
             resolve(&PostResolvers.create_post/3)
         end
+
+        @desc "Saves a user"
+        field :create_user, :user_type do
+            arg(:input, non_null(:user_input_type))
+            
+        end
     end
 end
