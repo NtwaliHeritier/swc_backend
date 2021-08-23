@@ -4,4 +4,5 @@ defmodule SwcBackendWeb.Schema.Types do
 
     import_types(Types.PostSchema)
     import_types(Types.UserSchema)
+    import_types(Types.SessionSchema)
 end

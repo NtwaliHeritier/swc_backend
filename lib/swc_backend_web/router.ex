@@ -2,9 +2,11 @@ defmodule SwcBackendWeb.Router do
   use SwcBackendWeb, :router
   alias SwcBackendWeb.Schema.Schema
   alias SwcBackendWeb.UserSocket
+  alias SwcBackendWeb.Context.Context
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Context
   end
 
   scope "/" do
