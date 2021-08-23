@@ -17,3 +17,7 @@ config :swc_backend, SwcBackend.Repo,
   hostname:  env!("POSTGRES_HOSTNAME", :string!),
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
+
+  config :swc_backend, SwcBackend.Guardian,
+  issuer: "swc_backend",
+  secret_key: env!("GUARDIAN_SECRET", :string!)
