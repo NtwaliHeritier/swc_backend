@@ -1,12 +1,17 @@
 defmodule SwcBackendWeb.Router do
   use SwcBackendWeb, :router
+  alias SwcBackendWeb.Schema.Schema
+  alias SwcBackendWeb.UserSocket
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  scope "/api", SwcBackendWeb do
+  scope "/" do
     pipe_through :api
+
+    forward "/api", Absinthe.Plug, schema: Schema
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: Schema, socket: UserSocket
   end
 
   # Enables LiveDashboard only for development

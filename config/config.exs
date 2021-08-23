@@ -6,6 +6,9 @@
 
 # General application configuration
 use Mix.Config
+# import Dotenvy
+
+# source!(".env")
 
 config :swc_backend,
   ecto_repos: [SwcBackend.Repo]

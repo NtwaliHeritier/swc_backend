@@ -6,8 +6,8 @@ use Mix.Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :swc_backend, SwcBackend.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "hatsor",
+  password: "hatsor",
   database: "swc_backend_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
