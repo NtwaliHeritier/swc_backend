@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :swc_backend, SwcBackend.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "hatsor",
+  password: "hatsor",
   database: "swc_backend_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,

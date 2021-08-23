@@ -46,6 +46,8 @@ defmodule SwcBackend.MixProject do
       {:absinthe, "~> 1.6"},
       {:absinthe_plug, "~> 1.5"},
       {:absinthe_phoenix, "~> 2.0"},
+      {:cloudex, "~> 1.4"},
+      {:dotenvy, "~> 0.5.0"}
     ]
   end
 
