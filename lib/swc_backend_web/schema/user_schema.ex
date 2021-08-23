@@ -22,7 +22,7 @@ defmodule SwcBackendWeb.Schema.Types.UserSchema do
         field :password, non_null(:string)
         field :password_confirmation, non_null(:string)
         field :phone,  non_null(:string)
-        field :picture,  non_null(:string)
+        field :picture, :string
         field :status,  non_null(:string)
     end
 end
