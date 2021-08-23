@@ -17,5 +17,6 @@ defmodule SwcBackend.Articles.Post do
     post
     |> cast(attrs, [:text, :picture, :video, :user_id])
     |> validate_required([:text])
+    |> assoc_constraint(:user)
   end
 end

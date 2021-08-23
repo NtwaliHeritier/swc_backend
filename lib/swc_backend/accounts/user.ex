@@ -10,6 +10,12 @@ defmodule SwcBackend.Accounts.User do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     field :role, :string, default: "user"
+    field :names, :string
+    field :age, :integer
+    field :gender, :integer
+    field :phone, :integer
+    field :picture, :integer
+    field :status, :integer
     has_many :posts, Post
 
     timestamps()
@@ -18,8 +24,8 @@ defmodule SwcBackend.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :username, :password, :password_confirmation])
-    |> validate_required([:email, :username, :password, :password_confirmation])
+    |> cast(attrs, [:email, :username, :password, :password_confirmation, :names, :age, :gender, :phone, :picture, :status])
+    |> validate_required([:email, :username, :password, :password_confirmation, :names, :age, :gender, :phone, :picture, :status])
     |> update_change(:email, &String.downcase/1)
     |> update_change(:username, &String.downcase/1)
     |> validate_format(:email, ~r/@/)
