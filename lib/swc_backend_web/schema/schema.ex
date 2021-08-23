@@ -9,7 +9,7 @@ defmodule SwcBackendWeb.Schema.Schema do
     query do
         @desc "Retrieves all posts"
         field :posts, list_of(:post_type) do
-            # middleware(Authorize, "user")
+            middleware(Authorize, "user")
             resolve(&PostResolvers.list_posts/3)
         end
     end
