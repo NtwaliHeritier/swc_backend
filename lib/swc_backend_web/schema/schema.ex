@@ -1,6 +1,7 @@
 defmodule SwcBackendWeb.Schema.Schema do
     use Absinthe.Schema
     alias SwcBackendWeb.Middleware.Authorize
+    alias SwcBackend.{Accounts, Articles}
 
     alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers}
 
@@ -32,5 +33,18 @@ defmodule SwcBackendWeb.Schema.Schema do
             arg(:input, non_null(:session_input_type))
             resolve(&SessionResolvers.login_user/3)
         end
+    end
+
+    def context(ctx) do
+        article_datasource = Articles.datasource()
+        account_datasource = Accounts.datasource()
+        loader = Dataloader.new
+                |> Dataloader.add_source(Article, article_datasource)
+                |> Dataloader.add_source(Account, account_datasource)
+        Map.put(ctx, :loader, loader)
+    end
+
+    def plugins do
+        [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults
     end
 end

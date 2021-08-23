@@ -101,4 +101,12 @@ defmodule SwcBackend.Accounts do
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
   end
+
+  def datasource do
+    Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  defp query(queryable, _) do
+    queryable
+  end
 end

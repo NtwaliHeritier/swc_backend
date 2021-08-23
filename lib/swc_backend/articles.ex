@@ -101,4 +101,12 @@ defmodule SwcBackend.Articles do
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
   end
+
+  def datasource do
+    Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  defp query(queryable, _) do
+    queryable
+  end
 end
