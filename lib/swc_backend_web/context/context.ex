@@ -12,8 +12,8 @@ defmodule SwcBackendWeb.Context.Context do
     end
 
     defp build_context(conn) do
-        with ["Authorization " <> token] <- get_req_header(conn),
-             {:ok, claims} <- Guardian.resource_from_claims(claims),
+        with ["Bearer " <> token] <- get_req_header(conn, "Authorization"),
+             {:ok, claims} <- Guardian.resource_from_claims(token),
              {:ok, user} <- Guardian.decode_and_verify(claims)
         do
             %{current_user: user}

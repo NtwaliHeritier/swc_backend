@@ -1,5 +1,6 @@
 defmodule SwcBackendWeb.Schema.Schema do
     use Absinthe.Schema
+    alias SwcBackendWeb.Middleware.Authorize
 
     alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers}
 
@@ -8,6 +9,7 @@ defmodule SwcBackendWeb.Schema.Schema do
     query do
         @desc "Retrieves all posts"
         field :posts, list_of(:post_type) do
+            # middleware(Authorize, "user")
             resolve(&PostResolvers.list_posts/3)
         end
     end
