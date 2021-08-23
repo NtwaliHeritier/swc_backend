@@ -7,10 +7,10 @@ defmodule SwcBackendWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", SwcBackendWeb do
+  scope "/" do
     pipe_through :api
 
-    forward "/", Absinthe.Plug, schema: Schema
+    forward "/api", Absinthe.Plug, schema: Schema
     forward "/graphiql", Absinthe.Plug.GraphiQL, schema: Schema, socket: UserSocket
   end
 
