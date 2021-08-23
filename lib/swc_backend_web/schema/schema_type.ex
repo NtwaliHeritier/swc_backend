@@ -3,4 +3,5 @@ defmodule SwcBackendWeb.Schema.Types do
     use Absinthe.Schema.Notation
 
     import_types(Types.PostSchema)
+    import_types(Types.UserSchema)
 end
