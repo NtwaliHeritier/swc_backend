@@ -4,8 +4,13 @@ defmodule SwcBackendWeb.Resolvers.UserResolvers do
     alias SwcBackend.Guardian
 
     def create_user(_, %{input: %{picture: picture} = input}, _) do
-        {:ok, %{url: picture_url}} = Cloudex.upload(picture)
-        compute_create(%{input | picture: picture_url})
+        with {:ok, picture} <- Cloudex.upload(picture)
+        do
+            compute_create(%{input | picture: picture.url})
+        else
+            _ ->
+                {:error, message: "Add correct image"}
+        end
     end
 
     def create_user(_,%{input: input},_) do
