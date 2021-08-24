@@ -80,6 +80,12 @@ defmodule SwcBackend.Friendships do
     |> Repo.update()
   end
 
+  def update_invitation_status(invitor_id, invitee_id) do
+    query = from(i in Invitation, where: i.invitee_id == ^invitee_id and i.invitor_id == ^invitor_id, or_where: i.invitee_id == ^invitor_id and i.invitor_id == ^invitee_id)
+    invitation = Repo.one(query)
+    update_invitation(invitation, %{status: "approved"})
+  end
+
   @doc """
   Deletes a invitation.
 
