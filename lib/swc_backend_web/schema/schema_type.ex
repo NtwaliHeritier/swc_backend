@@ -9,4 +9,5 @@ defmodule SwcBackendWeb.Schema.Types do
     import_types(Types.RoomSchema)
     import_types(Types.MessageSchema)
     import_types(Types.InvitationSchema)
+    import_types(Types.FriendSchema)
 end

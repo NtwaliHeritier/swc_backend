@@ -4,6 +4,7 @@ defmodule SwcBackend.Accounts.User do
   alias SwcBackend.Articles.{Post, Comment}
   alias SwcBackend.Chats.RoomUser
   alias SwcBackend.Friendships.Invitation
+  alias SwcBackend.Friendships.Friend
 
   schema "users" do
     field :email, :string, unique: true
@@ -26,6 +27,10 @@ defmodule SwcBackend.Accounts.User do
     has_many :invitors, through: [:received_invitations, :invitor]
     has_many :sent_invitations, Invitation, foreign_key: :invitor_id
     has_many :invitees, through: [:sent_invitations, :invitee]
+    has_many :follower_friends, Friend, foreign_key: :follower_id
+    has_many :followees, through: [:follower_friends, :followee]
+    has_many :followee_friends, Friend, foreign_key: :followee_id
+    has_many :followers, through: [:followee_friends, :follower]
 
     timestamps()
   end
