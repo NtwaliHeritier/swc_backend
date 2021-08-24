@@ -118,4 +118,61 @@ defmodule SwcBackend.ChatsTest do
       assert %Ecto.Changeset{} = Chats.change_message(message)
     end
   end
+
+  describe "room_users" do
+    alias SwcBackend.Chats.RoomUser
+
+    @valid_attrs %{}
+    @update_attrs %{}
+    @invalid_attrs %{}
+
+    def room_user_fixture(attrs \\ %{}) do
+      {:ok, room_user} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Chats.create_room_user()
+
+      room_user
+    end
+
+    test "list_room_users/0 returns all room_users" do
+      room_user = room_user_fixture()
+      assert Chats.list_room_users() == [room_user]
+    end
+
+    test "get_room_user!/1 returns the room_user with given id" do
+      room_user = room_user_fixture()
+      assert Chats.get_room_user!(room_user.id) == room_user
+    end
+
+    test "create_room_user/1 with valid data creates a room_user" do
+      assert {:ok, %RoomUser{} = room_user} = Chats.create_room_user(@valid_attrs)
+    end
+
+    test "create_room_user/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Chats.create_room_user(@invalid_attrs)
+    end
+
+    test "update_room_user/2 with valid data updates the room_user" do
+      room_user = room_user_fixture()
+      assert {:ok, %RoomUser{} = room_user} = Chats.update_room_user(room_user, @update_attrs)
+    end
+
+    test "update_room_user/2 with invalid data returns error changeset" do
+      room_user = room_user_fixture()
+      assert {:error, %Ecto.Changeset{}} = Chats.update_room_user(room_user, @invalid_attrs)
+      assert room_user == Chats.get_room_user!(room_user.id)
+    end
+
+    test "delete_room_user/1 deletes the room_user" do
+      room_user = room_user_fixture()
+      assert {:ok, %RoomUser{}} = Chats.delete_room_user(room_user)
+      assert_raise Ecto.NoResultsError, fn -> Chats.get_room_user!(room_user.id) end
+    end
+
+    test "change_room_user/1 returns a room_user changeset" do
+      room_user = room_user_fixture()
+      assert %Ecto.Changeset{} = Chats.change_room_user(room_user)
+    end
+  end
 end

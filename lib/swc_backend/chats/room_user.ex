@@ -1,11 +1,10 @@
-defmodule SwcBackend.Chats.Message do
+defmodule SwcBackend.Chats.RoomUser do
   use Ecto.Schema
   import Ecto.Changeset
   alias SwcBackend.Accounts.User
   alias SwcBackend.Chats.Room
 
-  schema "messages" do
-    field :text, :string
+  schema "room_users" do
     belongs_to :user, User
     belongs_to :room, Room
 
@@ -13,9 +12,9 @@ defmodule SwcBackend.Chats.Message do
   end
 
   @doc false
-  def changeset(message, attrs) do
-    message
-    |> cast(attrs, [:text])
-    |> validate_required([:text])
+  def changeset(room_user, attrs) do
+    room_user
+    |> cast(attrs, [:room_id, :user_id])
+    |> validate_required([:room_id, :user_id])
   end
 end

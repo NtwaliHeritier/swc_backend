@@ -2,6 +2,7 @@ defmodule SwcBackend.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias SwcBackend.Articles.{Post, Comment}
+  alias SwcBackend.Chats.RoomUser
 
   schema "users" do
     field :email, :string, unique: true
@@ -18,6 +19,8 @@ defmodule SwcBackend.Accounts.User do
     field :status, :string
     has_many :posts, Post
     has_many :comments, Comment
+    has_many :room_users, RoomUser
+    has_many :rooms, through: [:room_users, :room]
 
     timestamps()
   end
