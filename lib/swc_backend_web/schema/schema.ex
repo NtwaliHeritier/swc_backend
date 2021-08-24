@@ -1,7 +1,7 @@
 defmodule SwcBackendWeb.Schema.Schema do
     use Absinthe.Schema
     alias SwcBackendWeb.Middleware.Authorize
-    alias SwcBackend.{Accounts, Articles}
+    alias SwcBackend.{Accounts, Articles, Chats}
 
     alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers, CommentResolvers}
 
@@ -39,14 +39,21 @@ defmodule SwcBackendWeb.Schema.Schema do
             arg(:input, :comment_input_type)
             resolve(&CommentResolvers.create_comment/3)
         end
+
+        @desc "Adds a room"
+        field :add_room, :room_type do
+            arg(:input, :room_input_type)
+        end
     end
 
     def context(ctx) do
         article_datasource = Articles.datasource()
         account_datasource = Accounts.datasource()
+        chat_datasource = Chats.datasource()
         loader = Dataloader.new
                 |> Dataloader.add_source(Article, article_datasource)
                 |> Dataloader.add_source(Account, account_datasource)
+                |> Dataloader.add_source(Chat, chat_datasource)
         Map.put(ctx, :loader, loader)
     end
 

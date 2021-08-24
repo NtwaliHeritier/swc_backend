@@ -6,4 +6,6 @@ defmodule SwcBackendWeb.Schema.Types do
     import_types(Types.UserSchema)
     import_types(Types.SessionSchema)
     import_types(Types.CommentSchema)
+    import_types(Types.RoomSchema)
+    import_types(Types.MessageSchema)
 end

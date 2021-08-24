@@ -293,4 +293,12 @@ defmodule SwcBackend.Chats do
   def change_room_user(%RoomUser{} = room_user, attrs \\ %{}) do
     RoomUser.changeset(room_user, attrs)
   end
+
+  def datasource do
+    Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  defp query(queryable, _) do
+    queryable
+  end
 end
