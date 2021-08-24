@@ -7,7 +7,7 @@ defmodule SwcBackendWeb.Schema.Types.SessionSchema do
     end
 
     input_object :session_input_type do
-        field :email, :string
-        field :password, :string
+        field :email, non_null(:string)
+        field :password, non_null(:string)
     end
 end
