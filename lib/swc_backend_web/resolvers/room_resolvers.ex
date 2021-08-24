@@ -1,6 +1,5 @@
 defmodule SwcBackendWeb.Resolvers.RoomResolvers do
     alias SwcBackend.Chats
-    alias SwcBackendWeb.ChangesetErrors
 
     def create_room(_,%{counter_part: input},%{context: %{current_user: user}}) do
         with {:ok, room} <- Chats.create_room,
@@ -16,9 +15,6 @@ defmodule SwcBackendWeb.Resolvers.RoomResolvers do
 
     def list_rooms(_,_,%{context: %{current_user: user}}) do
         rooms = Chats.list_room_users_by_user_id(user.id)
-        IO.inspect "========================================"
-        IO.inspect rooms
-        IO.inspect "========================================"
         {:ok, rooms}
     end
 end
