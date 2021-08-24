@@ -2,7 +2,7 @@ defmodule SwcBackend.Articles.Post do
   use Ecto.Schema
   import Ecto.Changeset
   alias SwcBackend.Accounts.User
-  alias SwcBackend.Accounts.Comment
+  alias SwcBackend.Articles.Comment
 
   schema "posts" do
     field :picture, :string
