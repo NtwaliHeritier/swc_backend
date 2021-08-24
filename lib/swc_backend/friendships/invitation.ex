@@ -1,11 +1,12 @@
 defmodule SwcBackend.Friendships.Invitation do
   use Ecto.Schema
   import Ecto.Changeset
+  alias SwcBackend.Accounts.User
 
   schema "invitations" do
-    field :invitee_id, :integer
-    field :invitor_id, :integer
-    field :status, :string
+    belongs_to :invitee, User
+    belongs_to :invitor, User
+    field :status, :string, default: "pending"
 
     timestamps()
   end

@@ -3,6 +3,7 @@ defmodule SwcBackend.Accounts.User do
   import Ecto.Changeset
   alias SwcBackend.Articles.{Post, Comment}
   alias SwcBackend.Chats.RoomUser
+  alias SwcBackend.Friendships.Invitation
 
   schema "users" do
     field :email, :string, unique: true
@@ -21,6 +22,10 @@ defmodule SwcBackend.Accounts.User do
     has_many :comments, Comment
     has_many :room_users, RoomUser
     has_many :rooms, through: [:room_users, :room]
+    has_many :received_invitations, Invitation, foreign_key: :invitee_id
+    has_many :invitors, through: [:received_invitations, :invitor]
+    has_many :sent_invitations, Invitation, foreign_key: :invitor_id
+    has_many :invitees, through: [:sent_invitations, :invitee]
 
     timestamps()
   end
