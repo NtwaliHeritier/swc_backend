@@ -8,6 +8,7 @@ defmodule SwcBackend.Friendships do
 
   alias SwcBackend.Friendships.Invitation
   alias SwcBackend.Accounts.User
+  alias SwcBackend.Friendships.Friend
 
   @doc """
   Returns the list of invitations.
@@ -23,7 +24,7 @@ defmodule SwcBackend.Friendships do
   end
 
   def list_invitations_by_invitee_id(id) do
-    query = from(u in User, join: i in Invitation, on: i.invitee_id == u.id, where: i.invitee_id == ^id)
+    query = from(i in Invitation, join: u in User, on: i.invitee_id == u.id, where: i.invitee_id == ^id)
     Repo.all(query)
   end
 
@@ -129,6 +130,11 @@ defmodule SwcBackend.Friendships do
   """
   def list_friends do
     Repo.all(Friend)
+  end
+
+  def list_followers(user_id) do
+    query = from(u in User)
+    Repo.all(query)
   end
 
   @doc """

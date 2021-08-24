@@ -4,7 +4,7 @@ defmodule SwcBackendWeb.Schema.Schema do
     alias SwcBackend.{Accounts, Articles, Chats, Friendships}
 
     alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers, 
-    CommentResolvers, RoomResolvers, MessageResolvers, InvitationResolvers}
+    CommentResolvers, RoomResolvers, MessageResolvers, InvitationResolvers, FriendshipResolvers}
 
     import_types(SwcBackendWeb.Schema.Types)
 
@@ -23,6 +23,11 @@ defmodule SwcBackendWeb.Schema.Schema do
         @desc "Retrieves invitations"
         field :invitations, list_of(:invitation_type) do
             resolve(&InvitationResolvers.list_invitations/3)
+        end
+
+        @desc "Lists friends"
+        field :friends, list_of(:friend_type) do
+            resolve(&FriendshipResolvers.list_friends/3)
         end
     end
 
@@ -67,6 +72,12 @@ defmodule SwcBackendWeb.Schema.Schema do
         field :add_invitation, :invitation_type do
             arg(:input, :invitation_input_type)
             resolve(&InvitationResolvers.create_invitation/3)
+        end
+
+        @desc "Creates friendship"
+        field :add_friend, :friend_type do
+            arg(:input, :friend_input_type)
+            resolve(&FriendshipResolvers.create_friend/3)
         end
     end
 
