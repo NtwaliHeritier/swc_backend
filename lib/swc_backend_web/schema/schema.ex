@@ -63,10 +63,11 @@ defmodule SwcBackendWeb.Schema.Schema do
             resolve(&MessageResolvers.create_message/3)
         end
 
-        # @desc "Creates an invitation"
-        # field :add_invitation do
-            
-        # end
+        @desc "Creates an invitation"
+        field :add_invitation, :invitation_type do
+            arg(:input, :invitation_input_type)
+            resolve(&InvitationResolvers.create_invitation/3)
+        end
     end
 
     def context(ctx) do
