@@ -5,6 +5,12 @@ defmodule SwcBackendWeb.Schema.Types.RoomSchema do
 
     object :room_type do
         field :id, :id
-        field :messages, :message_type, resolve: dataloader(Chat)
+        field :messages, list_of(:message_type), resolve: dataloader(Chat)
+        field :users, list_of(:user_type), resolve: dataloader(Account)
+    end
+
+    object :room_user_type do
+        field :id, :id
+        field :room, :room_type, resolve: dataloader(Chat)
     end
 end

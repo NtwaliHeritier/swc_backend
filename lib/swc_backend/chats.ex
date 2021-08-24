@@ -213,6 +213,11 @@ defmodule SwcBackend.Chats do
     Repo.all(RoomUser)
   end
 
+  def list_room_users_by_user_id(user_id) do
+    query = from(ru in RoomUser, join: r in Room, on: r.id == ru.room_id, where: ru.user_id == ^user_id)
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single room_user.
 

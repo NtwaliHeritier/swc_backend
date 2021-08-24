@@ -8,6 +8,7 @@ defmodule SwcBackendWeb.Schema.Types.PostSchema do
         field :picture, :string
         field :video, :string
         field :user, :user_type, resolve: dataloader(Account)
+        field :comments, list_of(:comment_type), resolve: dataloader(Article)
     end
 
     input_object :post_input_type do

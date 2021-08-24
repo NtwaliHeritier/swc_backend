@@ -13,4 +13,12 @@ defmodule SwcBackendWeb.Resolvers.RoomResolvers do
             {:error, message: "Room not created"}
         end
     end
+
+    def list_rooms(_,_,%{context: %{current_user: user}}) do
+        rooms = Chats.list_room_users_by_user_id(user.id)
+        IO.inspect "========================================"
+        IO.inspect rooms
+        IO.inspect "========================================"
+        {:ok, rooms}
+    end
 end
