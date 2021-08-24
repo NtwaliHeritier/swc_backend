@@ -133,7 +133,7 @@ defmodule SwcBackend.Friendships do
   end
 
   def list_followers(user_id) do
-    query = from(u in User)
+    query = from(f in Friend, join: u in User, on: f.followee_id == u.id, where: f.followee_id == ^user_id)
     Repo.all(query)
   end
 

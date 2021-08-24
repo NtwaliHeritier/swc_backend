@@ -4,9 +4,7 @@ defmodule SwcBackendWeb.Resolvers.FriendshipResolvers do
 
     def list_friends(_,_,%{context: %{current_user: user}}) do
         friends = Friendships.list_followers(user.id)
-        IO.inspect("=================================")
-        IO.inspect(friends)
-        IO.inspect("=================================")
+        {:ok, friends}
     end
 
     def create_friend(_,%{input: input},%{context: %{current_user: user}}) do
