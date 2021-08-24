@@ -101,4 +101,12 @@ defmodule SwcBackend.Friendships do
   def change_invitation(%Invitation{} = invitation, attrs \\ %{}) do
     Invitation.changeset(invitation, attrs)
   end
+
+  def datasource do
+    Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  defp query(queryable, _) do
+    queryable
+  end
 end
