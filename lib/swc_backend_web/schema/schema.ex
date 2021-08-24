@@ -3,7 +3,7 @@ defmodule SwcBackendWeb.Schema.Schema do
     alias SwcBackendWeb.Middleware.Authorize
     alias SwcBackend.{Accounts, Articles, Chats}
 
-    alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers, CommentResolvers}
+    alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers, CommentResolvers, RoomResolvers}
 
     import_types(SwcBackendWeb.Schema.Types)
 
@@ -42,7 +42,8 @@ defmodule SwcBackendWeb.Schema.Schema do
 
         @desc "Adds a room"
         field :add_room, :room_type do
-            arg(:input, :room_input_type)
+            arg(:counter_part, :integer)
+            resolve(&RoomResolvers.create_room/3)
         end
     end
 

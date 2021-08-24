@@ -7,7 +7,4 @@ defmodule SwcBackendWeb.Schema.Types.RoomSchema do
         field :id, :id
         field :messages, :message_type, resolve: dataloader(Chat)
     end
-
-    input_oject :room_input_type do
-    end
 end

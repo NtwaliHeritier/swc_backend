@@ -16,5 +16,7 @@ defmodule SwcBackend.Chats.RoomUser do
     room_user
     |> cast(attrs, [:room_id, :user_id])
     |> validate_required([:room_id, :user_id])
+    |> assoc_constraint(:user)
+    |> assoc_constraint(:room)
   end
 end

@@ -17,5 +17,7 @@ defmodule SwcBackend.Chats.Message do
     message
     |> cast(attrs, [:text])
     |> validate_required([:text])
+    |> assoc_constraint(:user)
+    |> assoc_constraint(:room)
   end
 end
