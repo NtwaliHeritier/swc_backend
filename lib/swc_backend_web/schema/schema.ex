@@ -1,9 +1,10 @@
 defmodule SwcBackendWeb.Schema.Schema do
     use Absinthe.Schema
     alias SwcBackendWeb.Middleware.Authorize
-    alias SwcBackend.{Accounts, Articles, Chats}
+    alias SwcBackend.{Accounts, Articles, Chats, Friendships}
 
-    alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers, CommentResolvers, RoomResolvers, MessageResolvers}
+    alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers, 
+    CommentResolvers, RoomResolvers, MessageResolvers, InvitationResolvers}
 
     import_types(SwcBackendWeb.Schema.Types)
 
@@ -17,6 +18,11 @@ defmodule SwcBackendWeb.Schema.Schema do
         @desc "Retrieves user rooms"
         field :rooms, list_of(:room_user_type) do
             resolve(&RoomResolvers.list_rooms/3)
+        end
+
+        @desc "Retrieves invitations"
+        field :invitations, list_of(:invitation_type) do
+            resolve(&InvitationResolvers.list_invitations/3)
         end
     end
 
@@ -56,16 +62,24 @@ defmodule SwcBackendWeb.Schema.Schema do
             arg(:input, :message_input_type)
             resolve(&MessageResolvers.create_message/3)
         end
+
+        @desc "Creates an invitation"
+        field :add_invitation, :invitation_type do
+            arg(:input, :invitation_input_type)
+            resolve(&InvitationResolvers.create_invitation/3)
+        end
     end
 
     def context(ctx) do
         article_datasource = Articles.datasource()
         account_datasource = Accounts.datasource()
         chat_datasource = Chats.datasource()
+        friendship_datasource = Friendships.datasource()
         loader = Dataloader.new
                 |> Dataloader.add_source(Article, article_datasource)
                 |> Dataloader.add_source(Account, account_datasource)
                 |> Dataloader.add_source(Chat, chat_datasource)
+                |> Dataloader.add_source(Friendship, friendship_datasource)
         Map.put(ctx, :loader, loader)
     end
 

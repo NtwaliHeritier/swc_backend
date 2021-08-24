@@ -9,7 +9,7 @@ defmodule SwcBackendWeb.Schema.Types.MessageSchema do
     end
 
     input_object :message_input_type do
-        field :text, :string
-        field :room_id, :integer
+        field :text, non_null(:string)
+        field :room_id, non_null(:integer)
     end
 end
