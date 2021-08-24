@@ -2,8 +2,8 @@ defmodule SwcBackendWeb.Resolvers.InvitationResolvers do
     alias SwcBackend.Friendships
     alias SwcBackendWeb.ChangesetErrors
 
-    def list_invitations(_,_,_) do
-        invitations = Friendships.list_invitations
+    def list_invitations(_,_,%{context: %{current_user: user}}) do
+        invitations = Friendships.list_invitations_by_invitee_id(user.id)
         {:ok, invitations}
     end
 

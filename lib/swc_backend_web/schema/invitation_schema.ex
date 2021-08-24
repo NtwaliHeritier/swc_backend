@@ -4,8 +4,7 @@ defmodule SwcBackendWeb.Schema.Types.InvitationSchema do
 
     object :invitation_type do
         field :id, :id
-        field :invitor, :user_type, resolve: dataloader(Account)
-        field :invitee, :user_type, resolve: dataloader(Account)
+        field :invitors, list_of(:user_type), resolve: dataloader(Account)
     end
 
     input_object :invitation_input_type do
