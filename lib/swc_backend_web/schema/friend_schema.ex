@@ -4,8 +4,7 @@ defmodule SwcBackendWeb.Schema.Types.FriendSchema do
 
     object :friend_type do
         field :id, :id
-        field :followee_id, :integer
-        field :follower_id, :integer
+        field :follower, :user_type, resolve: dataloader(Account)
     end
 
     input_object :friend_input_type do

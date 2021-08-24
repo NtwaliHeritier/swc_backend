@@ -4,9 +4,6 @@ defmodule SwcBackendWeb.Resolvers.InvitationResolvers do
 
     def list_invitations(_,_,%{context: %{current_user: user}}) do
         invitations = Friendships.list_invitations_by_invitee_id(user.id)
-        IO.inspect "==============================="
-        IO.inspect invitations
-        IO.inspect "==============================="
         {:ok, invitations}
     end
 
