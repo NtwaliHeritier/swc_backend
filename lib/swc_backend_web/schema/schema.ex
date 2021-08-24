@@ -3,7 +3,7 @@ defmodule SwcBackendWeb.Schema.Schema do
     alias SwcBackendWeb.Middleware.Authorize
     alias SwcBackend.{Accounts, Articles, Chats}
 
-    alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers, CommentResolvers, RoomResolvers}
+    alias SwcBackendWeb.Resolvers.{PostResolvers, UserResolvers, SessionResolvers, CommentResolvers, RoomResolvers, MessageResolvers}
 
     import_types(SwcBackendWeb.Schema.Types)
 
@@ -49,6 +49,12 @@ defmodule SwcBackendWeb.Schema.Schema do
         field :add_room, :room_type do
             arg(:counter_part, :integer)
             resolve(&RoomResolvers.create_room/3)
+        end
+
+        @desc "Creates message"
+        field :add_message, :message_type do
+            arg(:input, :message_input_type)
+            resolve(&MessageResolvers.create_message/3)
         end
     end
 

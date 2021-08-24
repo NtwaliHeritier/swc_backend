@@ -11,6 +11,5 @@ defmodule SwcBackendWeb.Schema.Types.MessageSchema do
     input_object :message_input_type do
         field :text, :string
         field :room_id, :integer
-        field :user_id, :integer
     end
 end

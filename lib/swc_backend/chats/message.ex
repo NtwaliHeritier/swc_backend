@@ -15,8 +15,8 @@ defmodule SwcBackend.Chats.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:text])
-    |> validate_required([:text])
+    |> cast(attrs, [:text, :user_id, :room_id])
+    |> validate_required([:text, :user_id, :room_id])
     |> assoc_constraint(:user)
     |> assoc_constraint(:room)
   end
