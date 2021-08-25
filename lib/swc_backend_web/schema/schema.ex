@@ -81,6 +81,15 @@ defmodule SwcBackendWeb.Schema.Schema do
         end
     end
 
+    subscription do
+        @desc "Adds realtime to post creation"
+        field :subscribe_post, :post_type do
+            config fn(_,_) ->
+                {:ok, topic: :post_add}
+            end
+        end
+    end
+
     def context(ctx) do
         article_datasource = Articles.datasource()
         account_datasource = Accounts.datasource()

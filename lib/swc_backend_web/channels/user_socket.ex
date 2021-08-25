@@ -1,5 +1,6 @@
 defmodule SwcBackendWeb.UserSocket do
   use Phoenix.Socket
+  use Absinthe.Phoenix.Socket, schema: SwcBackendWeb.Schema.Schema
 
   ## Channels
   # channel "room:*", SwcBackendWeb.RoomChannel
