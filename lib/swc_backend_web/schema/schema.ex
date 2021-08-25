@@ -88,6 +88,14 @@ defmodule SwcBackendWeb.Schema.Schema do
                 {:ok, topic: :post_add}
             end
         end
+
+        @desc "Adds realtime to comment creation"
+        field :subscribe_comment, :comment_type do
+            arg(:post_id, non_null(:id))
+            config fn(args,_) ->
+                {:ok, topic: args.post_id}
+            end
+        end
     end
 
     def context(ctx) do
