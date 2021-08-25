@@ -22,7 +22,7 @@ defmodule SwcBackendWeb.Resolvers.MessageResolvers do
         )
     end
 
-    def subscribe_room(message) do
+    defp subscribe_room(message) do
         Absinthe.Subscription.publish(
             SwcBackendWeb.Endpoint,
             message,
