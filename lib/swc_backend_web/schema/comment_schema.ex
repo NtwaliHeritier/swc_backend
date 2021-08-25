@@ -6,6 +6,7 @@ defmodule SwcBackendWeb.Schema.Types.CommentSchema do
         field :id, :id
         field :text, :string
         field :user, :user_type, resolve: dataloader(Account)
+        field :post, :post_type, resolve: dataloader(Article)
     end
 
     input_object :comment_input_type do

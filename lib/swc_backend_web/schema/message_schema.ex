@@ -6,6 +6,7 @@ defmodule SwcBackendWeb.Schema.Types.MessageSchema do
         field :id, :id
         field :text, :string
         field :user, :user_type, resolve: dataloader(Account)
+        field :room, :room_type, resolve: dataloader(Chat)
     end
 
     input_object :message_input_type do
