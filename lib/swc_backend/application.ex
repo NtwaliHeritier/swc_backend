@@ -14,9 +14,10 @@ defmodule SwcBackend.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: SwcBackend.PubSub},
       # Start the Endpoint (http/https)
-      SwcBackendWeb.Endpoint
+      SwcBackendWeb.Endpoint,
       # Start a worker by calling: SwcBackend.Worker.start_link(arg)
       # {SwcBackend.Worker, arg}
+      {Absinthe.Subscription, [SwcBackendWeb.Endpoint]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

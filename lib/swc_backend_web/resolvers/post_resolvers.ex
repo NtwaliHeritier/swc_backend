@@ -58,10 +58,19 @@ defmodule SwcBackendWeb.Resolvers.PostResolvers do
     defp compute_create(input) do
         with {:ok, post} <- Articles.create_post(input)
         do
+            subscribe(post)
             {:ok, post}
         else
             {:error, %Ecto.Changeset{} = changeset} ->
                 {:error, message: "Post not created, make sure all fields are filled correctly", details: ChangesetErrors.error_details(changeset)}
         end
+    end
+
+    defp subscribe(post) do
+        Absinthe.Subscription.publish(
+            SwcBackendWeb.Endpoint,
+            post,
+            subscribe_post: :post_add
+        )
     end
 end

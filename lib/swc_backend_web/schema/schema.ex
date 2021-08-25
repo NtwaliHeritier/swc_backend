@@ -81,6 +81,31 @@ defmodule SwcBackendWeb.Schema.Schema do
         end
     end
 
+    subscription do
+        @desc "Adds realtime to post creation"
+        field :subscribe_post, :post_type do
+            config fn(_,_) ->
+                {:ok, topic: :post_add}
+            end
+        end
+
+        @desc "Adds realtime to comment creation"
+        field :subscribe_comment, :comment_type do
+            arg(:post_id, non_null(:id))
+            config fn(args,_) ->
+                {:ok, topic: args.post_id}
+            end
+        end
+
+        @desc "Adds realtime to message add"
+        field :subscribe_message, :message_type do
+            arg(:room_id, non_null(:id))
+            config fn(args,_) ->
+                {:ok, topic: args.room_id}
+            end
+        end
+    end
+
     def context(ctx) do
         article_datasource = Articles.datasource()
         account_datasource = Accounts.datasource()
