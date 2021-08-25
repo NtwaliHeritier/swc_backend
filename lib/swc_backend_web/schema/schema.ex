@@ -96,6 +96,14 @@ defmodule SwcBackendWeb.Schema.Schema do
                 {:ok, topic: args.post_id}
             end
         end
+
+        @desc "Adds realtime to message add"
+        field :subscribe_message, :message_type do
+            arg(:room_id, non_null(:id))
+            config fn(args,_) ->
+                {:ok, topic: args.room_id}
+            end
+        end
     end
 
     def context(ctx) do

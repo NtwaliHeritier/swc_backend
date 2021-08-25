@@ -6,9 +6,18 @@ defmodule SwcBackendWeb.Resolvers.MessageResolvers do
         input = Map.merge(input, %{user_id: user.id})
         case Chats.create_message(input) do
             {:ok, message} ->
+                subscribe(message)
                 {:ok, message}
             {:error, %Ecto.Changeset{} = changeset} ->
                 {:error, message: "Message not created", details: ChangesetErrors.error_details(changeset)}
         end
+    end
+
+    def subscribe(message) do
+        Absinthe.Subscription.publish(
+            SwcBackendWeb.Endpoint,
+            message,
+            subscribe_message: message.room_id
+        )
     end
 end
